@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.igorf.contacts.R
 import com.igorf.contacts.data.ContactVo
 import kotlinx.android.synthetic.main.fragment_contacts_list.contactsListRecyclerView
+import kotlinx.android.synthetic.main.fragment_contacts_list.searchContactListEdit
 
 class ContactsListFragment : Fragment(R.layout.fragment_contacts_list) {
 
@@ -50,6 +51,8 @@ class ContactsListFragment : Fragment(R.layout.fragment_contacts_list) {
                 contactsListAdapter.loadContactList(it)
             }
         )
+
+        searchContactListEdit.addTextChangedListener(listViewModel.listenerSearch())
     }
 
     private fun onItemClick(contactVo: ContactVo) {

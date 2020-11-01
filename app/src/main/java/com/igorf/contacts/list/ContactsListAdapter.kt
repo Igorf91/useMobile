@@ -26,6 +26,7 @@ class ContactsListAdapter(private val listener: (ContactVo) -> Unit) :
     override fun getItemCount() = contactsMutableList.size
 
     fun loadContactList(newItems: List<ContactVo>){
+        contactsMutableList.clear()
         contactsMutableList.addAll(newItems)
         notifyDataSetChanged()
     }

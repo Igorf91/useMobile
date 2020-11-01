@@ -1,5 +1,7 @@
 package com.igorf.contacts.list
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,6 +21,7 @@ class ContactsListViewModel(private val api: ContactsApi) : ViewModel() {
         private const val TAG = "ContactsListViewModel"
     }
 
+    private val mutableListContacts = mutableListOf<ContactVo>()
     private val _listContacts = MutableLiveData<List<ContactVo>>()
     val listContacts: LiveData<List<ContactVo>> = _listContacts
 
@@ -29,6 +32,7 @@ class ContactsListViewModel(private val api: ContactsApi) : ViewModel() {
                 response: Response<RequestDto>
             ) {
                 response.body()?.let {
+                    mutableListContacts.addAll(it.result)
                     _listContacts.postValue(it.result)
                 }
             }
@@ -39,6 +43,24 @@ class ContactsListViewModel(private val api: ContactsApi) : ViewModel() {
                 }
             }
         })
+    }
+
+    private fun filter(search: String) {
+        _listContacts.postValue(
+            mutableListContacts.filter { it.name.contains(search, true) }
+        )
+    }
+
+    fun listenerSearch() = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            // empty
+        }
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            // empty
+        }
+        override fun afterTextChanged(s: Editable?) {
+            filter(s.toString())
+        }
     }
 }
 
