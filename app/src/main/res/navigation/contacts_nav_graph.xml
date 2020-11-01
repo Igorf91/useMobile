@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contacts_nav_graph"
+    app:startDestination="@id/contactsListFragment">
+
+    <fragment
+        android:id="@+id/contactsListFragment"
+        android:name="com.igorf.contacts.list.ContactsListFragment"
+        android:label="ContactsListFragment"
+        tools:layout="@layout/fragment_contacts_list" >
+        <action android:id="@+id/contactsList_to_contactDetail"
+            app:destination="@id/contactDetailFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/contactDetailFragment"
+        android:name="com.igorf.contacts.detail.ContactDetailFragment"
+        android:label="ContactDetailFragment"
+        tools:layout="@layout/fragment_contact_detail">
+        <argument android:name="contactVo"
+            app:argType="com.igorf.contacts.data.ContactVo"/>
+    </fragment>
+
+</navigation>
