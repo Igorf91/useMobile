@@ -1,5 +1,5 @@
 package com.igorf.contacts.data
 
-class ContactListDto(
+class RequestDto(
     val result: List<ContactVo>
 )

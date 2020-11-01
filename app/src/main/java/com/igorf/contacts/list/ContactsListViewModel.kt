@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.igorf.contacts.data.ContactListDto
+import com.igorf.contacts.data.RequestDto
 import com.igorf.contacts.data.ContactVo
 import com.igorf.contacts.network.ContactsApi
 import com.igorf.contacts.util.RetrofitFactory
@@ -23,17 +23,17 @@ class ContactsListViewModel(private val api: ContactsApi) : ViewModel() {
     val listContacts: LiveData<List<ContactVo>> = _listContacts
 
     fun fetchListContacts() {
-        api.getUsersList().enqueue(object : Callback<ContactListDto> {
+        api.getUsersList().enqueue(object : Callback<RequestDto> {
             override fun onResponse(
-                call: Call<ContactListDto>,
-                response: Response<ContactListDto>
+                call: Call<RequestDto>,
+                response: Response<RequestDto>
             ) {
                 response.body()?.let {
                     _listContacts.postValue(it.result)
                 }
             }
 
-            override fun onFailure(call: Call<ContactListDto>, t: Throwable) {
+            override fun onFailure(call: Call<RequestDto>, t: Throwable) {
                 t.message?.let {
                     Log.e(TAG, it)
                 }

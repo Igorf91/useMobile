@@ -9,6 +9,18 @@
         android:id="@+id/contactsListFragment"
         android:name="com.igorf.contacts.list.ContactsListFragment"
         android:label="ContactsListFragment"
-        tools:layout="@layout/fragment_contacts_list" />
+        tools:layout="@layout/fragment_contacts_list" >
+        <action android:id="@+id/contactsList_to_contactDetail"
+            app:destination="@id/contactDetailFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/contactDetailFragment"
+        android:name="com.igorf.contacts.detail.ContactDetailFragment"
+        android:label="ContactDetailFragment"
+        tools:layout="@layout/fragment_contact_detail">
+        <argument android:name="contactVo"
+            app:argType="com.igorf.contacts.data.ContactVo"/>
+    </fragment>
 
 </navigation>
