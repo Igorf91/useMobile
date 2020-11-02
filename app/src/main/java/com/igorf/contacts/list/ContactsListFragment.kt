@@ -6,22 +6,19 @@ import android.speech.RecognizerIntent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.igorf.contacts.R
 import com.igorf.contacts.data.ContactVo
 import kotlinx.android.synthetic.main.fragment_contacts_list.contactsListRecyclerView
 import kotlinx.android.synthetic.main.fragment_contacts_list.searchContactListEdit
 import kotlinx.android.synthetic.main.fragment_contacts_list.voiceSearchIcon
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Locale
 
 class ContactsListFragment : Fragment(R.layout.fragment_contacts_list) {
 
     private lateinit var contactsListAdapter: ContactsListAdapter
-    private val listViewModel by lazy {
-        ViewModelProvider(this, ContactsListViewModelFactory())
-            .get(ContactsListViewModel::class.java)
-    }
+    private val listViewModel by viewModel<ContactsListViewModel>()
 
     companion object {
         private const val VOICE_REQUEST_CODE = 9874

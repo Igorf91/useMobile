@@ -4,16 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.igorf.contacts.data.ContactDetailVo
 import com.igorf.contacts.data.ContactVo
 import com.igorf.contacts.network.ContactsApi
-import com.igorf.contacts.util.RetrofitFactory
 import retrofit2.Callback
 import retrofit2.Response
 
 class ContactDetailViewModel(
-    private val contactVo: ContactVo,
     private val api: ContactsApi
 ) : ViewModel() {
 
@@ -22,8 +19,13 @@ class ContactDetailViewModel(
         private const val EMPTY_RESPONSE = "empty error result"
     }
 
+    private lateinit var contactVo: ContactVo
     private val _contactDetailLiveData = MutableLiveData<ContactDetailVo>()
     val contactDetailLiveData: LiveData<ContactDetailVo> = _contactDetailLiveData
+
+    fun init(contactVo: ContactVo) {
+        this.contactVo = contactVo
+    }
 
     fun fetchContactData() {
         api.getUserDetail(contactVo.id).enqueue(object : Callback<ContactDetailVo> {
@@ -43,13 +45,4 @@ class ContactDetailViewModel(
     }
 
     fun getToolbarTitle() = contactVo.name
-}
-
-class ContactDetailViewModelFactory(private val contactVo: ContactVo) : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>) =
-        ContactDetailViewModel(
-            contactVo,
-            RetrofitFactory().getRetrofit().create(ContactsApi::class.java)
-        ) as T
 }

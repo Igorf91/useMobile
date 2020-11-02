@@ -6,11 +6,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.igorf.contacts.data.RequestDto
 import com.igorf.contacts.data.ContactVo
+import com.igorf.contacts.data.RequestDto
 import com.igorf.contacts.network.ContactsApi
-import com.igorf.contacts.util.RetrofitFactory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,10 +60,4 @@ class ContactsListViewModel(private val api: ContactsApi) : ViewModel() {
             filter(s.toString())
         }
     }
-}
-
-class ContactsListViewModelFactory() : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>) =
-        ContactsListViewModel(RetrofitFactory().getRetrofit().create(ContactsApi::class.java)) as T
 }
