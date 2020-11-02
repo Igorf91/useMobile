@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Contacts</string>
     <string name="toolbar_contacts_list_title">Lista de pessoas</string>
+    <string name="contacts_list_search_hint">Pesquisar</string>
 </resources>

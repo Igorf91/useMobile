@@ -4,31 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DFDEDE"
     tools:context=".list.ContactsListFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchContactListInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@android:color/white"
+        android:padding="8dp"
+        app:layout_constraintEnd_toStartOf="@id/voiceSearchIcon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/searchContactListEdit"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_search_24"
             android:drawablePadding="8dp"
-            android:drawableStart="@drawable/ic_search_24"/>
+            android:hint="@string/contacts_list_search_hint" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:id="@+id/voiceSearchIcon"
+        android:src="@drawable/ic_voice_24"
+        android:layout_width="48dp"
+        android:background="@android:color/white"
+        android:layout_height="0dp"
+        android:importantForAccessibility="no"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchContactListInputLayout"
+        app:layout_constraintBottom_toBottomOf="@id/searchContactListInputLayout"
+        app:layout_constraintStart_toEndOf="@id/searchContactListInputLayout"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contactsListRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:background="@android:color/white"
+        android:layout_marginTop="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
